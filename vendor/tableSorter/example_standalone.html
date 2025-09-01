@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tablesorter example</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./dist/css/tableSorter.css">
+        <script src="./dist/js/tableSorter.min.js"></script>
+    </head>
+    <body>
+        <div id="tableTarget"></div>
+        <script>
+            const data = [
+                {id:"1", name:"Ed", age:72, position:"Ceo"},
+                {id:"2", name:"Tod", age:32, position:"Manager"},
+                {id:"3", name:"Helen", age:27, position:"Slave"},
+                {id:"4", name:"George", age:20, position:"Slave"},
+                {id:"5", name:"Phil", age:44, position:"Slave"},
+                {id:"6", name:"Pam", age:40, position:"Slave"},
+                {id:"7", name:"Otto", age:41, position:"Slave"},
+                {id:"8", name:"Julia", age:43, position:"Slave"},
+                {id:"9", name:"Harmony", age:40, position:"Slave"},
+                {id:"10", name:"Ted", age:37, position:"Slave"},
+                {id:"11", name:"Matt", age:65, position:"Slave"},
+                ]
+            const header = ["ID","Name","Age","Position"]
+
+            const table = new tableSorter({
+                    target : "#tableTarget",
+                    tableId : "table2",
+                    header : header,
+                    dataSet : data,
+                    filters : true,
+                    striped: true
+                })
+
+        </script>
+    </body>
+</html>

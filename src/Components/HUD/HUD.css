@@ -1,0 +1,66 @@
+:root {
+  --bg:#0f172a;
+  --panel:#111827;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+  --accent:#38bdf8;
+}
+body {
+  margin: 0; 
+  background: var(--bg); 
+  font-family: sans-serif; 
+  display: grid; 
+  grid-template-rows: auto 1fr; 
+  height: 100vh; }
+header { 
+  display: flex; 
+  gap: .75rem; 
+  padding: .75rem 1rem; 
+  background: rgba(255,255,255,.04); 
+  border-bottom: 1px solid rgba(255,255,255,.06); 
+  flex-wrap: wrap; 
+}
+.tool {
+     color: var(--text);
+    display: inline-flex; 
+    gap: .5rem; 
+    align-items: center; 
+    background: var(--panel); 
+    padding: .5rem .75rem; 
+    border-radius: .5rem;
+    
+}
+.tool button { padding: .5rem .75rem; border-radius: .5rem; border: none; cursor: pointer; }
+#stage {
+  margin-top:100px;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+.board-wrap{
+  width: min(1200px, 100%);
+  height: min(800px, calc(100vh - 110px));
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 1rem; overflow: hidden;
+}
+svg#board{
+  width:100%; 
+  height:100%; 
+  touch-action: none; 
+  display:block;
+}
+text { font-size: 10px; fill: #6ee7b7; user-select: none; }
+
+
+.board-wrap{
+  -webkit-user-select: none; /* Safari/Chrome */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+  user-select: none;         /* Standard */
+}
+
+.activeButton{
+  background-color: #2f2f61;
+  color:white;
+}
