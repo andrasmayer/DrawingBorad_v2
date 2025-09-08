@@ -20,7 +20,8 @@ class CAD{
                 lines : []
                 }
             ]
-
+        this.history = []
+        //this.Draw = Draw
     }
     init(){
         root.innerHTML = HUD(this)

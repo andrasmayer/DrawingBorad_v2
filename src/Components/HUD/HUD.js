@@ -1,6 +1,8 @@
 const {Line} = await import(`./OffCanvas/Line.js${app_version}`)
 const {Layers} = await import(`./OffCanvas/Layers/Layers.js${app_version}`)
 const {exportJSON} = await import(`./Tools/export/exportJSON.js${app_version}`)
+const {importJSON} = await import(`./Tools/import/importJSON.js${app_version}`)
+
 
 export const HUD = (self) =>{
     const url = new URL(import.meta.url);
@@ -68,9 +70,27 @@ export const HUD_events = (self) =>{
     const exportBtn = document.getElementById('exportBtn')
     exportBtn.addEventListener('click', ()=>exportJSON(self))
 
+    const importBtn = document.getElementById('importBtn')
+    importBtn.addEventListener('click', ()=>importJSON(self))
+    
 
 
-        
+    function clearAll(){
+        const strokesLayer = document.getElementById('strokes');
+        strokesLayer.innerHTML = ''
+        //console.log(self.history)
+      //  history.length = 0
+        //drawings.length = 0
+        self.drawings = [
+                {
+                name : "Layer",
+                lines : []
+                }
+            ]
+    }
+
+    const clearBtn = document.getElementById('clear')
+    clearBtn.addEventListener('click', clearAll)
 
 
 
