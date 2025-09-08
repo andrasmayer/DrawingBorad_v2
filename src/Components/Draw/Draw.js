@@ -30,9 +30,9 @@ export const Draw = (self) =>{
     const undoBtn = document.getElementById('undo');
     const clearBtn = document.getElementById('clear');
     const logBtn = document.getElementById('logData');
-    const exportBtn = document.getElementById('exportBtn');
+    //const exportBtn = document.getElementById('exportBtn');
     const importBtn = document.getElementById('importBtn');
-    const exportLevel = document.getElementById('exportLevel');
+    //const exportLevel = document.getElementById('exportLevel');
 
     let drawing = false;
     let panning = false;
@@ -92,20 +92,23 @@ export const Draw = (self) =>{
         }
 
     function pointerUp(){
+        //let line = {}
         if(panning){ panning=false; return; }
         if(!drawing|| isCtrlDown === true) return
         drawing = false
         history.push(currentPath)
         drawings.push([...points])
+
+
         currentPath = null
 
         const line = {
             color : colorEl.value,
             thickness : sizeEl.value,
-            coords : drawings
+            coords : [...points]
         }
 
-        self.drawings[0].lines.push(line)
+        self.drawings[self.activeLayer].lines.push(line)
     }
 
     function undo(){
@@ -120,38 +123,6 @@ export const Draw = (self) =>{
         drawings.length = 0
     }
 
-    function exportJSON(level){
-        
-        const factorMap = {full:1, mid:5, low:3, ultra:2}
-        const factor = factorMap[level] || 1
-        const exportData = drawings.map(path=>{
-            const filtered = path.filter((p,i)=>i%factor!==0 || factor===1)
-            let reduced = []
-            filtered.forEach(p=>{
-            const last = reduced[reduced.length-1]
-            if(!last || last.x!==p.x || last.y!==p.y) reduced.push({
-                    x:parseFloat(p.x.toFixed(4)/20).toFixed(2),
-                    y:parseFloat(p.y.toFixed(4)/20 * -1).toFixed(2)
-                })
-            })
-            return reduced;
-        })
-
-        console.log(exportData)
-        console.log(self.drawings)
-
-
-        
-        const blob = new Blob([JSON.stringify(exportData,null,2)],{type:'application/json'});
-        const url = URL.createObjectURL(blob)
-        const a = document.createElement('a')
-       // a.href = url
-       // a.download = 'drawing.json'
-        //a.click()
-        //URL.revokeObjectURL(url)
-        
-      // console.log( JSON.stringify(self.drawings) )
-    }
 
     function importJSON(){
         const input = document.createElement('input');
@@ -184,7 +155,7 @@ export const Draw = (self) =>{
         input.click();
     }
 
-    exportBtn.addEventListener('click', ()=>exportJSON(exportLevel.value));
+//    exportBtn.addEventListener('click', ()=>exportJSON(exportLevel.value));
     importBtn.addEventListener('click', importJSON);
     logBtn.addEventListener('click', ()=>console.log(drawings));
     undoBtn.addEventListener('click', undo);

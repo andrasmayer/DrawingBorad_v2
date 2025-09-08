@@ -1,4 +1,4 @@
-const {HUD} = await import(`./Components/HUD/HUD.js${app_version}`)
+const {HUD,HUD_events} = await import(`./Components/HUD/HUD.js${app_version}`)
 const {GRID} = await import(`./Components/HUD/GRID/GRID.js${app_version}`)
 const {Draw} = await import(`./Components/Draw/Draw.js${app_version}`)
 
@@ -11,6 +11,7 @@ class CAD{
                 name : "Layer",
                 lines : []
                 }
+       // this.levelOfDetail = 0
         this.selectedLayers = [0]
         this.activeLayer = 0
         this.drawings = [
@@ -23,7 +24,10 @@ class CAD{
     }
     init(){
         root.innerHTML = HUD(this)
+        
+        HUD_events(this)
         GRID(this)
+
 
 
         this.layerEvents()

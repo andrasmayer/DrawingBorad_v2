@@ -1,5 +1,6 @@
 const {Line} = await import(`./OffCanvas/Line.js${app_version}`)
 const {Layers} = await import(`./OffCanvas/Layers/Layers.js${app_version}`)
+const {exportJSON} = await import(`./Tools/export/exportJSON.js${app_version}`)
 
 export const HUD = (self) =>{
     const url = new URL(import.meta.url);
@@ -9,12 +10,11 @@ export const HUD = (self) =>{
     const dirPath = parts.join('/');      // /js
 
     const Layers_ = new Layers(self)
-    //console.log(Layers_)
+
 
     self.layerEvents = Layers_.events
     
-    //console.log(Layers_)
-    //console.log(Layers_.drawLayers)
+
 
 
     return`
@@ -58,4 +58,20 @@ export const HUD = (self) =>{
     </div>
         <link href="${dirPath}/HUD.css${app_version}" rel="stylesheet">
         `
+}
+
+
+
+
+export const HUD_events = (self) =>{
+
+    const exportBtn = document.getElementById('exportBtn')
+    exportBtn.addEventListener('click', ()=>exportJSON(self))
+
+
+
+        
+
+
+
 }
